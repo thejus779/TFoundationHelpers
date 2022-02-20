@@ -5,6 +5,7 @@
 //  Created by Thejus Thejus on 29/12/2021.
 //
 import Foundation
+
 extension Formatter {
     public static let dateISO8601: DateFormatter = {
         let formatter = DateFormatter()
@@ -31,4 +32,12 @@ extension Formatter {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
         return formatter
     }()
+}
+extension DateFormatter {
+    
+    /// Initializes a DateFormatter with the given date format
+    public convenience init(dateFormat: String) {
+        self.init()
+        self.dateFormat = dateFormat
+    }
 }

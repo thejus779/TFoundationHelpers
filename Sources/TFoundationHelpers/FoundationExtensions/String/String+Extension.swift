@@ -95,8 +95,8 @@ extension String {
 }
 
 extension Optional where Wrapped == String {
-    public var value: String {
-        self?.value ?? ""
+    public var forSort: String {
+        self?.forSort ?? ""
     }
 }
 
