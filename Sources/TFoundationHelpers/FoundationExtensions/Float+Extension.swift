@@ -19,3 +19,19 @@ extension Float {
         return (decimal as NSDecimalNumber?)?.floatValue
     }
 }
+extension Float {
+    var asCurrencyStyle: String {
+        let formatter = (self.truncatingRemainder(dividingBy: 1) == 0) ?
+            NumberFormatter.integerPrice : NumberFormatter.price
+        return formatter.string(from: NSNumber(value: self))!
+    }
+    var asPriceWithoutCurrency: String {
+        asCurrencyStyle.replacingOccurrences(of: "€", with: "").replacingOccurrences(of: " ", with: "")
+    }
+    var asStringifiedPrice: String {
+        let formatter = (self.truncatingRemainder(dividingBy: 1) == 0) ?
+            NumberFormatter.intergerPriceFormatter : NumberFormatter.priceFormatter
+        return formatter.string(from: NSNumber(value: self))!
+    }
+    
+}
