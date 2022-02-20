@@ -26,7 +26,7 @@ extension String {
         return result
     }
     
-    func isVersionGreaterThanEqualTo(_ b: String) -> Bool {
+    public func isVersionGreaterThanEqualTo(_ b: String) -> Bool {
         // Expecting
         let arrA = self.components(separatedBy: "-")
         let arrB = b.components(separatedBy: "-")
@@ -45,7 +45,7 @@ extension String {
         }
     }
     
-    func alphaNumericVersionGreaterThan(a: String, b: String) -> Bool {
+    public func alphaNumericVersionGreaterThan(a: String, b: String) -> Bool {
         let aStr = a.components(separatedBy: CharacterSet.decimalDigits).first ?? ""
         let aNumeric = a.components(separatedBy: aStr).last ?? "0"
         

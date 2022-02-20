@@ -8,7 +8,7 @@
 import Foundation
 
 extension Array {
-    func shiftRight(amount: Int = 1) -> [Element] {
+    public func shiftRight(amount: Int = 1) -> [Element] {
         var amount = amount
         assert(-count...count ~= amount, "Shift amount out of bounds")
         if amount < 0 { amount += count }  // this needs to be >= 0
@@ -20,7 +20,7 @@ extension Array {
     
     /// Returns (.left/.both, .right/.both)
     /// Split array according to conditions to left, right and discarded arrays
-    func splitFilter(isIncludedIn: @escaping (Element) -> SplitFilterResult) -> ([Element], [Element], [Element]) {
+    public func splitFilter(isIncludedIn: @escaping (Element) -> SplitFilterResult) -> ([Element], [Element], [Element]) {
         var left = [Element]()
         var right = [Element]()
         var discarded = [Element]()

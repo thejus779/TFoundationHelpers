@@ -11,7 +11,7 @@ import Foundation
  * isSecretCodeValid logic could change
  */
 extension String {
-    var isSecretCodeValid: Bool {
+    public var isSecretCodeValid: Bool {
         if self.count < 8 { return false }
         if self.count > 16 { return false }
 
@@ -34,33 +34,37 @@ extension String {
         return true
     }
     
-    func validForRegex(_ regex: String) -> Bool {
+    public func validForRegex(_ regex: String) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         return predicate.evaluate(with: self)
     }
     
-    func validForLength(_ length: Int) -> Bool {
+    public func validForLength(_ length: Int) -> Bool {
         return count >= length
     }
     
-    var isEmailValid: Bool {
+    public var isEmailValid: Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: self)
     }
     
-    var constainsNumber: Bool {
+    public var constainsNumber: Bool {
         return validForRegex(".*[0-9]+.*")
     }
     
-    var validForUppercaseAndLowercase: Bool {
+    public var validForUppercaseAndLowercase: Bool {
         return validForRegex(".*[A-Z]+.*") && validForRegex(".*[a-z]+.*")
     }
     
-    var validForSpecialCharacters: Bool {
+    public var validForSpecialCharacters: Bool {
         return self.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) != nil
     }
-    func containsAnyOf(strings: [String]) -> Bool {
+    public func containsAnyOf(strings: [String]) -> Bool {
         return strings.contains(where: contains)
     }
+    public var isValidName: Bool {
+        validForRegex("^[a-zA-Z `-À-ÖØ-öø-ÿ]+")
+    }
+    
 }

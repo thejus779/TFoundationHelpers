@@ -8,7 +8,7 @@
 import Foundation
 
 extension Data {
-    func mapJSON(failsOnEmptyData: Bool = true) throws -> Any {
+    public func mapJSON(failsOnEmptyData: Bool = true) throws -> Any {
         do {
             return try JSONSerialization.jsonObject(with: self, options: .allowFragments)
         } catch {
@@ -19,14 +19,14 @@ extension Data {
         }
     }
     
-    mutating func appendString(_ string: String) {
+    public mutating func appendString(_ string: String) {
         guard let data = string.data(using: .utf8, allowLossyConversion: false) else { return }
         append(data)
     }
 }
 extension Data {
     /// Append new Data from a content given by an URL
-    func append(from: URL) throws {
+    public func append(from: URL) throws {
         if let fileHandle = FileHandle(forWritingAtPath: from.path) {
             defer {
                 fileHandle.closeFile()

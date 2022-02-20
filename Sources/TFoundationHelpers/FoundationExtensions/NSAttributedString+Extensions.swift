@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension NSAttributedString {
-    static func attributedString(
+    public static func attributedString(
         text: String,
         font: UIFont,
         color: UIColor,
@@ -51,7 +51,7 @@ extension NSAttributedString {
         )
     }
     
-    static func twoPartsString(
+    public static func twoPartsString(
         string1: String, string2: String,
         string1Color: UIColor = .black,
         string2Color: UIColor = .red,
@@ -92,7 +92,7 @@ extension NSAttributedString {
             )
         )
     }
-    static func concatenating(_ args: NSAttributedString...) -> NSMutableAttributedString {
+    public static func concatenating(_ args: NSAttributedString...) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString()
         args.forEach { attributedString.append($0) }
         return attributedString

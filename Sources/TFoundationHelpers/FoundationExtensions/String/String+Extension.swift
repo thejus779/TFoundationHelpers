@@ -12,11 +12,11 @@ import CommonCrypto
 extension String {
     
     /// Used to localize string
-    var localized: String {
+    public var localized: String {
         return NSLocalizedString(self, comment: self)
     }
     
-    func starts(withAnyOf strings: [String], matchLongerPrefix: Bool = false) -> Bool {
+    public func starts(withAnyOf strings: [String], matchLongerPrefix: Bool = false) -> Bool {
         for string in strings {
             if starts(prefixString: string, matchLongerPrefix: matchLongerPrefix) {
                 return true
@@ -25,7 +25,7 @@ extension String {
         return false
     }
     
-    func starts(prefixString: String, matchLongerPrefix: Bool = false) -> Bool {
+    public func starts(prefixString: String, matchLongerPrefix: Bool = false) -> Bool {
         guard count > 0 else { return false }
         return starts(with: matchLongerPrefix ? String(prefixString.prefix(count)) : prefixString)
     }
@@ -58,7 +58,7 @@ extension String {
         )
     }
     
-    func toEan128Barcode() -> UIImage? {
+    public func toEan128Barcode() -> UIImage? {
         let data = self.data(using: .utf8)
         let filter = CIFilter(name: "CICode128BarcodeGenerator")
         filter?.setValue(data, forKey: "inputMessage")
@@ -70,27 +70,59 @@ extension String {
         }
     }
     
-    var isAlphanumeric: Bool {
+    public var isAlphanumeric: Bool {
         return self.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil && !isEmpty
     }
-    var hexColorToInteger: Int {
+    public var hexColorToInteger: Int {
         let cleanString = self.replacingOccurrences(of: "0x", with: "").replacingOccurrences(of: "#", with: "")
         return Int(cleanString, radix: 16) ?? 0
     }
     
-    var canonized: String {
+    public var canonized: String {
         return lowercased().folding(options: .diacriticInsensitive, locale: Locale.current)
     }
 
     /// Append new Data from an UTF8 content given by an URL + add a line break
-    func appendNewLine(from: URL) throws {
+    public func appendNewLine(from: URL) throws {
         try appending("\n").append(from: from)
     }
 
     /// Append new Data from an UTF8 content given by an URL
-    func append(from: URL) throws {
+    public func append(from: URL) throws {
         let data = self.data(using: String.Encoding.utf8)!
         try data.append(from: from)
+    }
+    
+    public var utfData: Data {
+        return Data(utf8)
+    }
+    
+    public var attributedHtmlString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: utfData, options: [
+              .documentType: NSAttributedString.DocumentType.html,
+              .characterEncoding: String.Encoding.utf8.rawValue
+            ],
+            documentAttributes: nil)
+        } catch {
+            print("Error:", error)
+            return nil
+        }
+    }
+    public func split(by length: Int) -> [String] {
+        var startIndex = self.startIndex
+        var results = [Substring]()
+
+        while startIndex < self.endIndex {
+            let endIndex = self.index(startIndex, offsetBy: length, limitedBy: self.endIndex) ?? self.endIndex
+            results.append(self[startIndex..<endIndex])
+            startIndex = endIndex
+        }
+
+        return results.map { String($0) }
+    }
+    public func attributedString() -> NSAttributedString {
+        NSAttributedString(string: self)
     }
 }
 

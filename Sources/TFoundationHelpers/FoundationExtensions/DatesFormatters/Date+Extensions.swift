@@ -9,39 +9,39 @@ import Foundation
 
 extension Date {
     
-    @nonobjc static let dayNamedmFormatter: DateFormatter = {
+    @nonobjc public static let dayNamedmFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr_FR")
         df.dateFormat = "EEEE dd/MM"
         return df
     }()
     
-    @nonobjc static let dayNamedmyFormatter: DateFormatter = {
+    @nonobjc public static let dayNamedmyFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr_FR")
         df.dateFormat = "EEEE dd/MM/yy"
         return df
     }()
 
-    @nonobjc static let dmFormatter: DateFormatter = {
+    @nonobjc public static let dmFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "dd/MM"
         return df
     }()
     
-    @nonobjc static let dmyFormatter: DateFormatter = {
+    @nonobjc public static let dmyFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         return df
     }()
 
-    @nonobjc static let dmyhmsFormatter: DateFormatter = {
+    @nonobjc public static let dmyhmsFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "dd/MM/yyyy HH:mm:ss"
         return df
     }()
 
-    @nonobjc static let mediumDateFormatter: DateFormatter = {
+    @nonobjc public static let mediumDateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
         df.timeStyle = .none
@@ -49,55 +49,55 @@ extension Date {
         return df
     }()
 
-    @nonobjc static var fullDateFormatter: DateFormatter = {
+    @nonobjc public static var fullDateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr")
         df.dateFormat = "dd MMMM yyyy"
         return df
     }()
     
-    static func hoursMinutesDateTimeFormatter(separator: String = ":") -> DateFormatter {
+    public static func hoursMinutesDateTimeFormatter(separator: String = ":") -> DateFormatter {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr")
         df.dateFormat = "HH'\(separator)'mm"
         return df
     }
     
-    @nonobjc static let hoursMinutesDateAltTimeFormatter: DateFormatter = {
+    @nonobjc public static let hoursMinutesDateAltTimeFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr")
         df.dateFormat = "H'h'mm"
         return df
     }()
     
-    @nonobjc static let weekDayIndexFormatter: DateFormatter = {
+    @nonobjc public static let weekDayIndexFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr")
         df.dateFormat = "e"
         return df
     }()
     
-    @nonobjc static let weekDayFormatter: DateFormatter = {
+    @nonobjc public static let weekDayFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr")
         df.dateFormat = "EEEE"
         return df
     }()
     
-    static let defaultDate = "01/01/1980"
+    public static let defaultDate = "01/01/1980"
 
-    static func fromDMY(_ dmy: String) -> Date? {
+    public static func fromDMY(_ dmy: String) -> Date? {
         return Date.dmyFormatter.date(from: dmy)
     }
 
-    var iso8601: String {
+    public var iso8601: String {
         return Formatter.dateTimeIso8601.string(from: self)
     }
     
-    func daysUntilNow(useStartOfday: Bool = true) -> Int? {
+    public func daysUntilNow(useStartOfday: Bool = true) -> Int? {
         return componentsUntilNow(components: [.day], useStartOfday: useStartOfday).day
     }
-    func hoursUntilNow() -> Int? {
+    public func hoursUntilNow() -> Int? {
         return componentsUntilNow(components: [.hour], useStartOfday: false).hour
     }
     
@@ -111,10 +111,10 @@ extension Date {
         )
     }
     
-    func offsetedBy(days: Int) -> Date {
+    public func offsetedBy(days: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: days, to: Date()) ?? Date()
     }
-    func isSameDay(as date: Date) -> Bool {
+    public func isSameDay(as date: Date) -> Bool {
         let day = Calendar.current.component(.day, from: self)
         let day2 = Calendar.current.component(.day, from: date)
 
@@ -127,7 +127,7 @@ extension Date {
         return day == day2 && month == month2 && year == year2
     }
     
-    static func getDayOfWeek(_ dayName: String, locale: Locale) -> Int? {
+    public static func getDayOfWeek(_ dayName: String, locale: Locale) -> Int? {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
         formatter.locale = locale
@@ -135,20 +135,20 @@ extension Date {
         return Date.getDayOfWeek(date)
     }
     
-    static func getDayOfWeek(_ date: Date) -> Int {
+    public static func getDayOfWeek(_ date: Date) -> Int {
         let myCalendar = Calendar(identifier: .gregorian)
         return myCalendar.component(.weekday, from: date)
     }
     
     
-    static let frenchFullWordDateFormatter: DateFormatter = {
+    public static let frenchFullWordDateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr_FR")
         df.dateFormat = "EEEE dd MMMM"
         return df
     }()
     
-    static let frenchFullWordDateWithYearFormatter: DateFormatter = {
+    public static let frenchFullWordDateWithYearFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "fr_FR")
         df.dateFormat = "EEEE dd MMMM yyyy"
@@ -161,13 +161,13 @@ extension Date {
         let components = calendar.dateComponents(components, from: self)
         return calendar.date(from: components)
     }
-    func isAnteriorOrEqualTo(date: Date, comparisonUsing components: Set<Calendar.Component>) -> Bool {
+    public func isAnteriorOrEqualTo(date: Date, comparisonUsing components: Set<Calendar.Component>) -> Bool {
         guard   let selfTransposed = transposed(to: components),
                 let otherTransposed = date.transposed(to: components)
             else { return false }
         return selfTransposed <= otherTransposed
     }
-    func isPosteriorOrEqualTo(date: Date, comparisonUsing components: Set<Calendar.Component>) -> Bool {
+    public func isPosteriorOrEqualTo(date: Date, comparisonUsing components: Set<Calendar.Component>) -> Bool {
         guard   let selfTransposed = transposed(to: components),
                 let otherTransposed = date.transposed(to: components)
             else { return false }

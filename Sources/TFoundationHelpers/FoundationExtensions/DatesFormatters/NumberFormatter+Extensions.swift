@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension NumberFormatter {
-    static var priceFormatter: NumberFormatter = {
+    public static var priceFormatter: NumberFormatter = {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "fr_FR")
         nf.numberStyle = .none
@@ -19,7 +19,7 @@ extension NumberFormatter {
         return nf
     }()
     
-    static var intergerPriceFormatter: NumberFormatter = {
+    public static var intergerPriceFormatter: NumberFormatter = {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "fr_FR")
         nf.numberStyle = .none
@@ -29,14 +29,14 @@ extension NumberFormatter {
         return nf
     }()
     
-    @nonobjc static var decimal: NumberFormatter = {
+    @nonobjc public static var decimal: NumberFormatter = {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "fr_FR")
         nf.numberStyle = .decimal
         return nf
     }()
 
-    @nonobjc static var price: NumberFormatter = {
+    @nonobjc public static var price: NumberFormatter = {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "fr_FR")
         nf.numberStyle = .currency
@@ -46,7 +46,7 @@ extension NumberFormatter {
         return nf
     }()
 
-    @nonobjc static var integerPrice: NumberFormatter = {
+    @nonobjc public static var integerPrice: NumberFormatter = {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "fr_FR")
         nf.numberStyle = .currency
@@ -56,7 +56,7 @@ extension NumberFormatter {
         return nf
     }()
 
-    @nonobjc static var gigabyteSize: NumberFormatter = {
+    @nonobjc public static var gigabyteSize: NumberFormatter = {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "fr_FR")
         nf.maximumFractionDigits = 2
@@ -73,7 +73,7 @@ extension NumberFormatter {
         return formatter
     }()
     
-    static func commaFormatter(minDigitLimit: Int? = 2, maxDigitLimit: Int? = 2) -> NumberFormatter {
+    public static func commaFormatter(minDigitLimit: Int? = 2, maxDigitLimit: Int? = 2) -> NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         if let minDigitLimit = minDigitLimit {

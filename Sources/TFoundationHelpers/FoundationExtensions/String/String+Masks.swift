@@ -14,14 +14,14 @@ extension String {
         let idx2 = index(startIndex, offsetBy: range.upperBound)
         return String(self[idx1..<idx2])
     }
-    func applyingMonthYearMask() -> String {
+    public func applyingMonthYearMask() -> String {
         guard count >= 2 else { return self }
         var baseString = removingSlashes()
         baseString.insert("/", at: index(startIndex, offsetBy: 2))
         return baseString
     }
     
-    func applyingCardNumberMask() -> String {
+    public func applyingCardNumberMask() -> String {
         return spaceChars(per: 4)
     }
     private func spaceChars(per batch: Int) -> String {
@@ -35,15 +35,15 @@ extension String {
         return result
     }
     
-    func removingSpaces() -> String {
+    public func removingSpaces() -> String {
         return self.replacingOccurrences(of: " ", with: "")
     }
     
-    func removingSlashes() -> String {
+    public func removingSlashes() -> String {
         return self.replacingOccurrences(of: "/", with: "")
     }
     
-    func barCodeStringByApplyingEAN13Mask() -> String {
+    public func barCodeStringByApplyingEAN13Mask() -> String {
         if self.count != 13 {
             return self
         }

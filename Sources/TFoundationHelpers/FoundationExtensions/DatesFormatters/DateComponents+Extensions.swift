@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DateComponents {
+public extension DateComponents {
     static let chronologicalFormatter: (DateComponents, DateComponents) -> Bool = { dc1, dc2 in
         guard   let dc1year = dc1.year, let dc2year = dc2.year,
             let dc1month = dc1.month, let dc2month = dc2.month else {
